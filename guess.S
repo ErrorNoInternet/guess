@@ -3,17 +3,16 @@
 .include "atoi.S"
 .include "constants.S"
 .include "data.S"
+.include "print.S"
 
 .lcomm input, 3
 
 .global _start
 
 _start:
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, offset welcome
-	mov rdx, 37
-	syscall
+	mov  rax, offset welcome_message
+	mov  rdi, 37
+	call print_str
 
 	call loop
 
@@ -22,17 +21,17 @@ _start:
 	syscall
 
 loop:
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, offset number_prompt
-	mov rdx, 34
-	syscall
+	mov  rax, offset number_prompt
+	mov  rdi, 34
+	call print_str
+	call print_flush
 
 	xor rax, rax
 	xor rdi, rdi
 	mov rsi, offset input
-	mov rdi, 2
+	mov rdx, 3
 	syscall
+	xor rdx, rdx
 
 	mov  rdi, offset input
 	call atoi
@@ -40,28 +39,21 @@ loop:
 	cmp rax, number
 	jl  low
 	jg  high
-	je  correct
+
+	mov  rax, offset win_message
+	mov  rdi, 26
+	call print_str
+	call print_flush
+	ret
 
 low:
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, offset low_message
-	mov rdx, 20
-	syscall
-	jmp loop
+	mov  rax, offset low_message
+	mov  rdi, 20
+	call print_str
+	jmp  loop
 
 high:
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, offset high_message
-	mov rdx, 21
-	syscall
-	jmp loop
-
-correct:
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, offset win_message
-	mov rdx, 26
-	syscall
-	ret
+	mov  rax, offset high_message
+	mov  rdi, 21
+	call print_str
+	jmp  loop

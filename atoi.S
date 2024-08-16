@@ -4,6 +4,7 @@ atoi:
 convert:
 	mov   bl, [rdi]
 	movzx rsi, bl
+	inc   rdi
 
 	test rsi, rsi
 	je   done
@@ -19,7 +20,6 @@ convert:
 	imul rax, 10
 	add  rax, rsi
 
-	inc rdi
 	jmp convert
 
 error:
