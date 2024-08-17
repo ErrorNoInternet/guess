@@ -5,7 +5,7 @@
 .include "data.S"
 .include "print.S"
 
-.lcomm input, 3
+.lcomm input, 10
 
 .global _start
 
@@ -29,13 +29,17 @@ loop:
 	xor rax, rax
 	xor rdi, rdi
 	mov rsi, offset input
-	mov rdx, 3
+	mov rdx, 10
 	syscall
 	xor rdx, rdx
 
 	mov  rdi, offset input
 	call atoi
 
+	cmp rax, 1
+	jl  invalid
+	cmp rax, 100
+	jg  invalid
 	cmp rax, number
 	jl  low
 	jg  high
@@ -55,5 +59,11 @@ low:
 high:
 	mov  rax, offset high_message
 	mov  rdi, 21
+	call print_str
+	jmp  loop
+
+invalid:
+	mov  rax, offset invalid_message
+	mov  rdi, 27
 	call print_str
 	jmp  loop
