@@ -6,14 +6,27 @@
 .include "itoa.S"
 .include "print.S"
 
-.lcomm tries, 1
+.lcomm number, 8
+.lcomm tries, 8
 .lcomm input, 10
 
 .global _start
 
 _start:
+	mov rax, SYS_GETRANDOM
+	mov rdi, offset number
+	mov rsi, 1
+	mov rdx, 0
+	syscall
+
+	mov rax, number
+	mov rbx, 101
+	div rbx
+	inc rdx
+	mov number, rdx
+
 	mov bl, max_tries
-	mov [tries], bl
+	mov tries, bl
 
 	mov  rax, offset welcome_message
 	mov  rdi, 37
@@ -22,7 +35,7 @@ _start:
 	call loop
 
 exit:
-	mov rax, 60
+	mov rax, SYS_EXIT
 	xor rdi, rdi
 	syscall
 
@@ -126,11 +139,11 @@ invalid:
 	jmp  loop
 
 dec_tries:
-	mov bl, [tries]
+	mov bl, tries
 	dec bl
 
 	test bl, bl
 	je   lose
 
-	mov [tries], bl
+	mov tries, bl
 	jmp loop

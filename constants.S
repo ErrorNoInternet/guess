@@ -1,2 +1,5 @@
-number = 69
-max_tries  = 6
+	SYS_READ = 0
+	SYS_WRITE = 1
+	SYS_EXIT = 60
+	SYS_GETRANDOM = 318
+	max_tries  = 7

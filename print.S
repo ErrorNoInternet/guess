@@ -14,7 +14,7 @@ print_str:
 	ret
 
 print_flush:
-	mov rax, 1
+	mov rax, SYS_WRITE
 	mov rdi, 1
 	mov rsi, offset _print_buf
 	syscall

@@ -6,8 +6,8 @@ itoa:
 itoa_loop:
 	test rax, rax
 	jne  itoa_convert
-    mov rcx, 20
-    sub rcx, rsi
+	mov  rcx, 20
+	sub  rcx, rsi
 	jmp  itoa_done
 
 itoa_convert:

@@ -14,10 +14,10 @@ number_prompt:
 	.ascii "enter your guess: "
 
 lose_message_0:
-    .ascii "uh oh, you ran out of tries! the number was "
+	.ascii "uh oh, you ran out of tries! the number was "
 
 lose_message_1:
-    .ascii "...\nbetter luck next time!\n"
+	.ascii "...\nbetter luck next time!\n"
 
 low_message:
 	.ascii "too low!\n"
