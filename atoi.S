@@ -1,7 +1,7 @@
 atoi:
 	xor rax, rax
 
-convert:
+atoi_convert:
 	mov   bl, [rdi]
 	movzx rsi, bl
 	inc   rdi
@@ -20,7 +20,7 @@ convert:
 	imul rax, 10
 	add  rax, rsi
 
-	jmp convert
+	jmp atoi_convert
 
 error:
 	mov rax, -1

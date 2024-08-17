@@ -13,11 +13,6 @@ print_str:
 
 	ret
 
-print_char:
-	mov [_print_buf + rdx], bl
-	inc rdx
-	ret
-
 print_flush:
 	mov rax, 1
 	mov rdi, 1
