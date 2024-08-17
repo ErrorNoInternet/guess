@@ -24,6 +24,7 @@ _start:
 	div rbx
 	inc rdx
 	mov number, rdx
+	xor rdx, rdx
 
 	mov bl, max_tries
 	mov tries, bl
