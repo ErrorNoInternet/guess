@@ -1,4 +1,4 @@
-.lcomm _print_buf, 4096
+.lcomm _print_buf, 1024
 
 print_str:
 	mov bl, [rax]
